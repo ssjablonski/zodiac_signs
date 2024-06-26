@@ -1,0 +1,228 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont} 
+\usepackage[polish]{babel}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[top=1in, bottom=1.5in, left=1.25in, right=1.25in]{geometry}
+
+\usepackage{subfig}
+\usepackage{multirow}
+\usepackage{multicol}
+\graphicspath{{Imagens/}}
+\usepackage{xcolor,colortbl}
+\usepackage{float}
+
+\newcommand \comment[1]{\textbf{\textcolor{red}{#1}}}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage{indentfirst}
+\usepackage{placeins}
+\usepackage{scalefnt}
+\usepackage{xcolor,listings}
+\usepackage{textcomp}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{framed}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{HTML}{C42043}
+\definecolor{backcolour}{HTML}{F2F2F2}
+\definecolor{bookColor}{cmyk}{0,0,0,0.90}  
+\color{bookColor}
+
+\lstset{upquote=true}
+
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codepurple},
+	numberstyle=\numberstyle,
+	stringstyle=\color{codepurple},
+	basicstyle=\footnotesize\ttfamily,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=10pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+}
+\lstset{style=mystyle}
+
+\newcommand\numberstyle[1]{%
+	\footnotesize
+	\color{codegray}%
+	\ttfamily
+	\ifnum#1<10 0\fi#1 |%
+}
+
+\definecolor{shadecolor}{HTML}{F2F2F2}
+
+\newenvironment{sqltable}%
+{\snugshade\verbatim}%
+{\endverbatim\endsnugshade}
+
+% Margins
+\addtolength{\footskip}{0cm}
+\addtolength{\textwidth}{1.4cm}
+\addtolength{\oddsidemargin}{-.7cm}
+
+\addtolength{\textheight}{1.6cm}
+
+% paragrafo
+\addtolength{\parskip}{.2cm}
+
+% Set up the header and footer
+\pagestyle{fancy}
+\rhead{\hmwkAuthorName} % Top left header
+\lhead{\hmwkClass: \hmwkTitle} % Top center header
+\rhead{\firstxmark} % Top right header
+\lfoot{Sebastian Jabłoński} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{} % Bottom right footer
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+\newcommand{\hmwkTitle}{Zodiac Signs} % Tytuł projektu
+\newcommand{\hmwkDueDate}{\today} % Data 
+\newcommand{\hmwkClass}{Technologie chmurowe} % Nazwa przedmiotu
+\newcommand{\hmwkAuthorName}{Sebastian Jabłoński} % Imię i nazwisko
+
+\begin{document}
+
+\begin{titlepage}
+    \vfill
+    \begin{center}
+    \hspace*{-1cm}
+    \vspace*{0.5cm}
+    \includegraphics[scale=0.55]{imagens/loga.png}\\
+    \textbf{Uniwersytet Gdański \\ [0.05cm]Wydział Matematyki, Fizyki i Informatyki \\ [0.05cm] Instytut Informatyki}
+
+    \vspace{0.6cm}
+    \vspace{4cm}
+    {\huge \textbf{\hmwkTitle}}\vspace{8mm}
+    
+    {\large \textbf{\hmwkAuthorName}}\\[3cm]
+    
+        \hspace{.45\textwidth} %posiciona a minipage
+       \begin{minipage}{.5\textwidth}
+       Projekt z przedmiotu technologie chmurowe na kierunku informatyka profil praktyczny na Uniwersytecie Gdańskim.\\[0.1cm]
+      \end{minipage}
+      \vfill
+    
+    \textbf{Gdańsk}
+    
+    \textbf{\hmwkDueDate}
+    \end{center}
+    
+\end{titlepage}
+
+\newpage
+\setcounter{secnumdepth}{5}
+\tableofcontents
+\newpage
+
+\section{Opis projektu}
+\label{sec:Project}
+
+Projekt "Zodiac Signs" ma na celu stworzenie aplikacji webowej, która umożliwia użytkownikom sprawdzenie swojego znaku zodiaku na podstawie daty urodzenia. Jest to realizowane poprzez aplikację opartą na architekturze mikroserwisowej, zarządzaną za pomocą Kubernetes.
+
+\subsection{Opis architektury - 8 pkt}
+\label{sec:introduction}
+Architektura aplikacji oparta jest na Kubernetes, systemie orkiestracji kontenerów, który automatyzuje wdrażanie, skalowanie i zarządzanie aplikacjami kontenerowymi. W skład architektury wchodzą następujące moduły i komponenty:
+
+\begin{itemize}
+    \item \textbf{Frontend:} Aplikacja zbudowana w React, dostarczająca interaktywny interfejs użytkownika. Jest odpowiedzialna za prezentację danych i interakcję z użytkownikiem.
+    \item \textbf{Backend:} Serwer zbudowany przy użyciu Express.js, odpowiedzialny za przetwarzanie żądań i logikę biznesową. Obsługuje komunikację między frontendem a bazą danych.
+    \item \textbf{Baza Danych:} PostgreSQL używany do przechowywania danych aplikacji oraz Redis jako pamięć podręczna (cache), co przyspiesza dostęp do często używanych danych.
+    \item \textbf{Konteneryzacja:} Wszystkie komponenty aplikacji są zapakowane w kontenery Docker, co zapewnia spójność środowiska uruchomieniowego i ułatwia wdrażanie.
+\end{itemize}
+
+\subsection{Opis infrastruktury - 6 pkt}
+\label{sec:Users}
+Aplikacja działa w środowisku chmurowym, z wykorzystaniem Kubernetes do zarządzania zasobami. Kluczowe narzędzia i platformy to:
+
+\begin{itemize}
+    \item \textbf{Kubernetes:} Orkiestracja kontenerów, zarządzanie wdrożeniami i skalowaniem aplikacji. Kubernetes zapewnia wysoką dostępność i elastyczność, umożliwiając dynamiczne skalowanie aplikacji w zależności od obciążenia.
+    \item \textbf {Docker:} Konteneryzacja aplikacji, zapewniając spójne środowisko uruchomieniowe. Docker pozwala na łatwe tworzenie, wdrażanie i uruchamianie aplikacji w kontenerach.
+    \item \textbf {Chmurowa Platforma:} Wykorzystanie usług chmurowych (np. Google Cloud, AWS) do hostowania klastrów Kubernetes. Chmura oferuje elastyczność, skalowalność oraz różnorodne usługi wspierające działanie aplikacji.
+    \item \textbf {Sieć i Pamięć:} Konfiguracja sieci w klastrze Kubernetes, wykorzystanie Persistent Volumes do przechowywania danych. Sieciowe komponenty Kubernetes umożliwiają komunikację między usługami, a Persistent Volumes zapewniają trwałe przechowywanie danych.
+\end{itemize}
+
+\subsubsection{Pliki w folderze \texttt{k8s}}
+Folder \texttt{k8s} zawiera pliki konfiguracyjne Kubernetes, które definiują różne aspekty aplikacji. Oto krótki opis każdego z nich:
+
+\begin{itemize}
+    \item \texttt{deployment.yaml} - Definiuje wdrożenie (Deployment) aplikacji, określając liczbę replik oraz obraz kontenera do użycia.
+    \item \texttt{service.yaml} - Konfiguruje usługę (Service), umożliwiającą komunikację pomiędzy komponentami aplikacji wewnątrz klastra.
+    \item \texttt{ingress.yaml} - Definiuje zasady wejścia (Ingress), które kontrolują dostęp do aplikacji z zewnątrz klastra Kubernetes.
+\end{itemize}
+
+\subsection{Opis komponentów aplikacji - 8 pkt}
+\label{sec:FunctionalConditions}
+Projekt "Zodiac Signs" to kompleksowa aplikacja webowa, która umożliwia użytkownikom odkrywanie informacji na temat swoich znaków zodiaku. Składa się ona z kilku kluczowych komponentów, które współpracują ze sobą, aby zapewnić pełną funkcjonalność systemu. Poniżej przedstawiono szczegółowy opis każdego z tych komponentów, w tym sposoby ich wdrażania, konfiguracji i zarządzania.
+
+\subsubsection{Frontend}
+Frontend aplikacji Zodiac Signs jest zbudowany przy użyciu biblioteki React, co zapewnia dynamiczne i responsywne interfejsy użytkownika. Jest on serwowany przez serwer Nginx, co gwarantuje szybką i bezpieczną obsługę żądań HTTP. Wdrażanie frontendu odbywa się za pomocą pliku client-deployment.yaml, który określa specyfikację deploymentu w środowisku Kubernetes. Usługa frontendu jest konfigurowana przez plik client-cluster-ip-service.yaml, który eksponuje frontend wewnątrz klastra Kubernetes, umożliwiając łatwy dostęp do aplikacji
+
+\subsubsection{Backend}
+Backend projektu odpowiada za przetwarzanie logiki biznesowej aplikacji oraz obsługę zapytań przychodzących z frontendu. Został zaimplementowany jako serwer Node.js, co zapewnia wysoką wydajność i skalowalność. Wdrażanie backendu realizowane jest za pomocą pliku server-deployment.yaml. Konfiguracja usługi backendu jest zdefiniowana w pliku server-cluster-ip-service.yaml, który eksponuje backend wewnątrz klastra Kubernetes, umożliwiając komunikację z frontendem.
+
+\subsubsection{Baza danych Redis}
+W projekcie wykorzystywana jest baza danych Redis do przechowywania danych tymczasowych, takich jak sesje użytkowników czy cache. Redis charakteryzuje się wysoką wydajnością i szybkim dostępem do danych, co jest kluczowe dla responsywności aplikacji. Wdrażanie Redis odbywa się za pomocą pliku redis-deployment.yaml, a konfiguracja usługi jest zdefiniowana w pliku redis-cluster-ip-service.yaml, co umożliwia integrację bazy danych z pozostałymi komponentami systemu.
+
+\subsubsection{Ingress Controler}
+Do zarządzania zewnętrznym dostępem do aplikacji wykorzystywany jest Ingress Controller. Konfiguracja Ingress Controllera realizowana jest za pomocą plików ingress-class.yaml oraz ingress.yaml. Pozwala to na efektywne zarządzanie ruchem HTTP(S) do różnych usług w klastrze Kubernetes, bazując na zdefiniowanych regułach URL, co ułatwia dostęp do aplikacji z poziomu internetu.
+
+
+
+\subsection{Konfiguracja i zarządzanie - 4 pkt}
+\label{sec:NonFunctionalConditions}
+Konfiguracja i zarządzanie aplikacją na poziomie klastra Kubernetes obejmuje:
+\begin{itemize}
+    \item \textbf{Manifesty Kubernetes:} Pliki YAML definiujące Deployment-y, Service-y i Ingress-y.
+    \item \textbf{ConfigMaps i Secrets:} Używane do przechowywania konfiguracji aplikacji i wrażliwych danych, takich jak hasła.
+    \item \textbf{Helm:} Używany do zarządzania wdrożeniami i łatwego aktualizowania konfiguracji.
+\end{itemize}
+
+\subsection{Zarządzanie błędami - 2 pkt}
+\label{sec:ERD} 
+Zarządzanie aplikacją odbywa się poprzez monitorowanie logów oraz aktualnego stanu podów i usług w klastrze Kubernetes. Do diagnostyki i analizy problemów używane są narzędzia takie jak kubectl logs oraz kubectl describe pod. Aby monitorować stan aplikacji, korzysta się z poleceń kubectl get pods i kubectl get services, które pokazują bieżący status podów i usług. W przypadku wykrycia problemów, szczególną uwagę poświęca się analizie logów podów w celu zidentyfikowania przyczyn problemów. W sytuacji awarii Kubernetes automatycznie restartuje nieudane pody, co zapewnia wysoką dostępność aplikacji. Dodatkowo, konfiguracja deploymentów umożliwia automatyczne skalowanie liczby replik w odpowiedzi na zmiany obciążenia, co minimalizuje ryzyko awarii spowodowanych przeciążeniem systemu.
+
+\subsection{Skalowalność - 4 pkt}
+\label{sec:ExamplesSection}
+Skalowalność aplikacji zapewnia Kubernetes dzięki:
+\begin{itemize}
+    \item \textbf{Horizontal Pod Autoscaler:} Automatyczne skalowanie liczby replik Pod-ów na podstawie metryk (np. CPU, pamięć).
+    \item \textbf{Load Balancing:} Równoważenie obciążenia za pomocą Kubernetes Services i Ingress Controller-a.
+    \item \textbf{Resource Limits:} Konfiguracja limitów zasobów dla Pod-ów, aby zapewnić optymalną wydajność.
+\end{itemize}
+
+\subsection{Wymagania dotyczące zasobów - 2 pkt}
+\label{sec:ExampleTables}
+Wymagania dotyczące zasobów dla każdego komponentu aplikacji to:
+\begin{itemize}
+    \item \textbf{Frontend:} Minimum 256MB RAM, 0.5 CPU.
+    \item \textbf{Backend:} Minimum 512MB RAM, 1 CPU.
+    \item \textbf{PostgreSQL:} Minimum 1GB RAM, 1 CPU, 10GB Storage.
+    \item \textbf{Redis:} Minimum 256MB RAM, 0.5 CPU.
+\end{itemize}
+
+\subsection{Architektura sieciowa - 4 pkt}
+\label{sec:ExampleResults}
+Architektura sieciowa projektu projektu opiera się na klastrze Kubernetes, który integruje różne komponenty aplikacji, takie jak frontend, backend, baza danych Redis i PostgreSQL, oraz Ingress Controller. Komunikacja między tymi komponentami jest zarządzana przez Serwisy ClusterIP, które umożliwiają wewnętrzną komunikację w klastrze bez eksponowania usług na zewnątrz. Ingress Controller zapewnia zewnętrzny dostęp do aplikacji, kierując ruch sieciowy do odpowiednich serwisów na podstawie zdefiniowanych reguł. Całość tworzy skalowalną i bezpieczną architekturę sieciową, która jest elastyczna w zarządzaniu i dostosowana do potrzeb aplikacji webowej.
+
+\noindent
+\textbf{Każdy odnośnik, który znajdzie się w literaturze musi mieć swoje odwołanie w projekcie. - 2 pkt} 
+
+\bibliographystyle{amsplain}
+\bibliography{references.bib}
+\nocite{*}
+
+\end{document}

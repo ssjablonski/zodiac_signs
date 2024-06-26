@@ -67,12 +67,13 @@ class Zodiac extends Component {
           />
           <button>Submit</button>
         </form>
+        <div className="results">
+          <h3>Dates I have seen:</h3>
+          <div className="result">{this.renderSeenDates()}</div>
 
-        <h3>Dates I have seen:</h3>
-        <div className="results">{this.renderSeenDates()}</div>
-
-        <h3>Calculated Zodiac Signs:</h3>
-        <div className="results">{this.renderZodiacSigns()}</div>
+          <h3>Calculated Zodiac Signs:</h3>
+          <div className="result">{this.renderZodiacSigns()}</div>
+        </div>
       </div>
     );
   }

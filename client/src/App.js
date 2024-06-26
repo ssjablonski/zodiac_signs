@@ -1,8 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import OtherPage from "./OtherPage";
+import ZodiacDescription from "./ZodiacDescription";
 import Zodiac from "./Zodiac";
 
 function App() {
@@ -11,12 +10,14 @@ function App() {
       <div className="App">
         <header className="App-header">
           <h1>Sprawdź swoj znak zodiaku!</h1>
-          <Link to="/">Home</Link>
-          <Link to="/otherpage">Other Page</Link>
+          <div className="links">
+            <Link to="/">Home</Link>
+            <Link to="/otherpage">Zodiac Signs Descriptions</Link>
+          </div>
         </header>
         <div>
           <Route exact path="/" component={Zodiac} />
-          <Route path="/otherpage" component={OtherPage} />
+          <Route path="/otherpage" component={ZodiacDescription} />
         </div>
       </div>
     </Router>
